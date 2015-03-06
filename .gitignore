@@ -1,0 +1,6 @@
+node_modules
+karma-specs.json
+junit-output.xml
+results-file.json
+spec-file.json
+videos

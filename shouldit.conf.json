@@ -1,0 +1,5 @@
+{
+    "specs": "features/*.md",
+    "results": "karma-specs.json",
+    "map": "features/map.yml"
+}
