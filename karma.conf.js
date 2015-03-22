@@ -14,6 +14,10 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'build/polyfill.js',
+      'build/jquery.js',
+      'build/react.js',
+      'build/pagination.js',
       'tests/*Spec.js'
     ],
 

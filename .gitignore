@@ -4,3 +4,4 @@ junit-output.xml
 results-file.json
 spec-file.json
 videos
+build/.module-cache
