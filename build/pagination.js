@@ -46,7 +46,9 @@ var PageNumbers = React.createClass({displayName: "PageNumbers",
   render: function() {
     var pages = [];
     for(i=1; i<=this.props.pages; i++) {
-        pages.push(React.createElement(PageNumber, {page: i, current: this.props.current, key: i}));
+        if (shouldDisplayPageLink(this.props.current, i, this.props.pages)) {
+            pages.push(React.createElement(PageNumber, {page: i, current: this.props.current, key: i}));
+        }
     }
     return (React.createElement("span", null, pages));
   }
@@ -61,3 +63,17 @@ var PageNumber = React.createClass({displayName: "PageNumber",
     return (React.createElement("a", {className: "page-number", onClick: gotoPage(page)}, page));
   }
 });
+
+function shouldDisplayPageLink(current, page, pages) {
+    if (
+        isInFirstFour(current, page)
+    ) {
+        return true;
+    }
+}
+
+function isInFirstFour(current, page) {
+    if (current < 5 && page < 6) {
+        return true;
+    }
+}
