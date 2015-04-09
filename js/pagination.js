@@ -7,6 +7,7 @@ var Pagination = React.createClass({
     return (
         <div className="pagination">
         { (current == 1)? '' : <PreviousLink current={current} /> }
+        <PageNumbers current={current} pages={pages} />
         { (current >= pages)? '' : <NextLink current={current} pages={pages} /> }
       </div>
     );
@@ -38,5 +39,22 @@ var NextLink = React.createClass({
         Next
       </a>
     );
+  }
+});
+
+var PageNumbers = React.createClass({
+  render: function() {
+    var pages = [];
+    for(i=1; i<=this.props.pages; i++) {
+        pages.push(<PageNumber page={i} current={this.props.current} key={i} />);
+    }
+    return (<span>{pages}</span>);
+  }
+});
+
+var PageNumber = React.createClass({
+  render: function() {
+    var page = this.props.page;
+    return (<a className="page-number" onClick={gotoPage(page)}>{page}</a>);
   }
 });
