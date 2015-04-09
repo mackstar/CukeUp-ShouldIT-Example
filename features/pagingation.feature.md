@@ -5,7 +5,7 @@
 + IT should display next and previous links when available
 + IT should display the first page link as a number
 + IT should display the last page link as a number
-- IT should display a deliminator '...' when there are gaps between page numbers
++ IT should display a deliminator '...' when there are gaps between page numbers
 + IT should not have a link for the current page
 
 ## First 4 pages

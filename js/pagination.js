@@ -47,6 +47,9 @@ var PageNumbers = React.createClass({
     var pages = [];
     for(i=1; i<=this.props.pages; i++) {
         if (shouldDisplayPageLink(this.props.current, i, this.props.pages)) {
+            if (pages.length > 0 && pages[pages.length-1].props.page != (i-1)) {
+                pages.push(<Dots key={i-1} />);
+            }
             pages.push(<PageNumber page={i} current={this.props.current} key={i} />);
         }
     }
@@ -64,12 +67,32 @@ var PageNumber = React.createClass({
   }
 });
 
+var Dots = React.createClass({
+  render: function() {
+    return (<span>...</span>);
+  }
+});
+
 function shouldDisplayPageLink(current, page, pages) {
     if (
-        isInFirstFour(current, page) ||
+        isInFirstFour(current, page) || 
         isInLastFour(current, page, pages) ||
+        isFirstPage(page) ||
+        isLastPage(page, pages) ||
         isEitherSideOfCurrent(page, current)
     ) {
+        return true;
+    }
+}
+
+function isFirstPage(page) {
+    if (page === 1) {
+        return true;
+    }
+}
+
+function isLastPage(page, pages) {
+    if (page === pages) {
         return true;
     }
 }

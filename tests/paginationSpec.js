@@ -33,6 +33,12 @@ describe("Pagination", function() {
         expect($('a.page-number').length).toEqual(2);
     });
 
+    it("should display a deliminator '...' when there are gaps between page numbers", function() {
+        createPagination({ current: 5, pages: 17});
+        expect($('a.page-number').first().next().text()).toEqual("...");
+        expect($('a.page-number').last().prev().text()).toEqual("...");
+    });
+
     describe("First 4 pages", function() {
         it("should display up to the first 5 page numbers when available", function() {
             createPagination({ current: 2, pages: 17});
