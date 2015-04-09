@@ -22,6 +22,11 @@ describe("Pagination", function() {
         expect($('a.page-number').first().text()).toEqual("1");
     });
 
+    it("should display the first page link as a number", function() {
+        createPagination({ current: 2, pages: 3});
+        expect($('a.page-number').first().text()).toEqual("1");
+    });
+
     function createPagination(data) {
         React.render(
             React.createElement(Pagination, data),
