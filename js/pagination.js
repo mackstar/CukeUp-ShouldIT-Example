@@ -7,8 +7,8 @@ var Pagination = React.createClass({
     return (
       <div className="pagination">
         { (current == 1)? '' : <PreviousLink current={current} /> }
-        { (current >= pages)? '' : <NextLink current={current} pages={pages} /> }
         <PageNumbers current={current} pages={pages} />
+        { (current >= pages)? '' : <NextLink current={current} pages={pages} /> }
       </div>
     );
   }
@@ -16,8 +16,9 @@ var Pagination = React.createClass({
 
 var PreviousLink = React.createClass({
     render: function() {
+        var previous = this.props.current - 1;
         return (
-          <a className="previous">
+          <a className="previous" onClick={gotoPage(previous)}>
             Previous
           </a>
         );
@@ -35,7 +36,7 @@ var PageNumbers = React.createClass({
             pages.push(<PageNumber page={i} current={this.props.current} key={i} />);
         }
     }
-    return (<div>{pages}</div>);
+    return (<span>{pages}</span>);
   }
 });
 
@@ -94,14 +95,21 @@ var PageNumber = React.createClass({
     if (this.props.current === page) {
         return (<span className="page-number">{page}</span>);
     }
-    return (<a className="page-number">{page}</a>);
+    return (<a className="page-number" onClick={gotoPage(page)}>{page}</a>);
   }
 });
 
+function gotoPage(page) {
+  return function() {
+    window.document.location.href = window.document.location.href.replace(/\d*$/, page);
+  }
+}
+
 var NextLink = React.createClass({
   render: function() {
+    var next = this.props.current + 1;
     return (
-      <a className="next">
+      <a className="next" onClick={gotoPage(next)}>
         Next
       </a>
     );

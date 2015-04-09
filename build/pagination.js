@@ -7,8 +7,8 @@ var Pagination = React.createClass({displayName: "Pagination",
     return (
       React.createElement("div", {className: "pagination"}, 
          (current == 1)? '' : React.createElement(PreviousLink, {current: current}), 
-         (current >= pages)? '' : React.createElement(NextLink, {current: current, pages: pages}), 
-        React.createElement(PageNumbers, {current: current, pages: pages})
+        React.createElement(PageNumbers, {current: current, pages: pages}), 
+         (current >= pages)? '' : React.createElement(NextLink, {current: current, pages: pages})
       )
     );
   }
@@ -16,8 +16,9 @@ var Pagination = React.createClass({displayName: "Pagination",
 
 var PreviousLink = React.createClass({displayName: "PreviousLink",
     render: function() {
+        var previous = this.props.current - 1;
         return (
-          React.createElement("a", {className: "previous"}, 
+          React.createElement("a", {className: "previous", onClick: gotoPage(previous)}, 
             "Previous"
           )
         );
@@ -35,7 +36,7 @@ var PageNumbers = React.createClass({displayName: "PageNumbers",
             pages.push(React.createElement(PageNumber, {page: i, current: this.props.current, key: i}));
         }
     }
-    return (React.createElement("div", null, pages));
+    return (React.createElement("span", null, pages));
   }
 });
 
@@ -94,14 +95,21 @@ var PageNumber = React.createClass({displayName: "PageNumber",
     if (this.props.current === page) {
         return (React.createElement("span", {className: "page-number"}, page));
     }
-    return (React.createElement("a", {className: "page-number"}, page));
+    return (React.createElement("a", {className: "page-number", onClick: gotoPage(page)}, page));
   }
 });
 
+function gotoPage(page) {
+  return function() {
+    window.document.location.href = window.document.location.href.replace(/\d*$/, page);
+  }
+}
+
 var NextLink = React.createClass({displayName: "NextLink",
   render: function() {
+    var next = this.props.current + 1;
     return (
-      React.createElement("a", {className: "next"}, 
+      React.createElement("a", {className: "next", onClick: gotoPage(next)}, 
         "Next"
       )
     );

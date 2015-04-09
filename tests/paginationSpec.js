@@ -1,4 +1,3 @@
-
 describe("Pagination", function() {
 
     var el;
@@ -37,8 +36,6 @@ describe("Pagination", function() {
         expect($('a.page-number').first().next().text()).toEqual("...");
         expect($('a.page-number').last().prev().text()).toEqual("...");
     });
-
-
 
     it("should not have a link for the current page", function() {
         createPagination({ current: 2, pages: 3});
