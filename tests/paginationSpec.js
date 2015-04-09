@@ -11,9 +11,10 @@ describe("Pagination", function() {
         $('body').html('');
     })
 
-    it("should render", function() {
-        createPagination();
-        expect(el.text()).toEqual("Hello, world! I am a Pagination Component.");
+    it("should display next and previous links when available", function() {
+        createPagination({ current: 2, pages: 3});
+        expect($('a.next').length).toBe(1);
+        expect($('a.previous').length).toBe(1);
     });
 
     function createPagination(data) {
