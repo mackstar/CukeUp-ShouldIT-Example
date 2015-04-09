@@ -67,7 +67,8 @@ var PageNumber = React.createClass({
 function shouldDisplayPageLink(current, page, pages) {
     if (
         isInFirstFour(current, page) ||
-        isInLastFour(current, page, pages)
+        isInLastFour(current, page, pages) ||
+        isEitherSideOfCurrent(page, current)
     ) {
         return true;
     }
@@ -82,6 +83,13 @@ function isInFirstFour(current, page) {
 function isInLastFour(current, page, pages) {
     var lowest = pages - 4;
     if (current > lowest && page >= lowest) {
+        return true;
+    }
+}
+
+
+function isEitherSideOfCurrent(page, current) {
+    if (page >= current - 2 && page <= current + 2) {
         return true;
     }
 }

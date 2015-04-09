@@ -57,6 +57,18 @@ describe("Pagination", function() {
         });
     });
 
+    describe("Inbetween pages", function() {
+        it("should display 2 pages either side of the current page", function() {
+            createPagination({ current: 5, pages: 17});
+            var current;
+            for (var i = 3; i <= 7; i++) {
+                if (i !== 5) {
+                    expect($("a:contains('" + i + "')").length).toBeGreaterThan(0);
+                }
+            };
+        });
+    });
+
     function createPagination(data) {
         React.render(
             React.createElement(Pagination, data),
