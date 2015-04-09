@@ -45,6 +45,18 @@ describe("Pagination", function() {
         });
     });
 
+    describe("Last 4 pages", function() {
+        it("should display the 5 last page numbers", function() {
+            createPagination({ current: 17, pages: 17});
+            var current;
+            for (var i = 17; i >= 13; i--) {
+                current = current? current.prev() : $('.page-number').last();
+                expect(parseInt(current.text())).toEqual(i);
+            };
+            expect(current.prev().text()).not.toEqual('12');
+        });
+    });
+
     function createPagination(data) {
         React.render(
             React.createElement(Pagination, data),

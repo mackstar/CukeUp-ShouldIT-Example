@@ -66,7 +66,8 @@ var PageNumber = React.createClass({
 
 function shouldDisplayPageLink(current, page, pages) {
     if (
-        isInFirstFour(current, page)
+        isInFirstFour(current, page) ||
+        isInLastFour(current, page, pages)
     ) {
         return true;
     }
@@ -74,6 +75,13 @@ function shouldDisplayPageLink(current, page, pages) {
 
 function isInFirstFour(current, page) {
     if (current < 5 && page < 6) {
+        return true;
+    }
+}
+
+function isInLastFour(current, page, pages) {
+    var lowest = pages - 4;
+    if (current > lowest && page >= lowest) {
         return true;
     }
 }
