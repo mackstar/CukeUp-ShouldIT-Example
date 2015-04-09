@@ -55,6 +55,9 @@ var PageNumbers = React.createClass({
 var PageNumber = React.createClass({
   render: function() {
     var page = this.props.page;
+    if (this.props.current === page) {
+        return (<span className="page-number">{page}</span>);
+    }
     return (<a className="page-number" onClick={gotoPage(page)}>{page}</a>);
   }
 });

@@ -27,6 +27,12 @@ describe("Pagination", function() {
         expect($('a.page-number').last().text()).toEqual("3");
     });
 
+    it("should not have a link for the current page", function() {
+        createPagination({ current: 2, pages: 3});
+        expect($('span.page-number').first().text()).toEqual("2");
+        expect($('a.page-number').length).toEqual(2);
+    });
+
     function createPagination(data) {
         React.render(
             React.createElement(Pagination, data),
