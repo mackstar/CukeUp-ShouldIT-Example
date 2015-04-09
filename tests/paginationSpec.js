@@ -22,9 +22,9 @@ describe("Pagination", function() {
         expect($('a.page-number').first().text()).toEqual("1");
     });
 
-    it("should display the first page link as a number", function() {
+    it("should display the last page link as a number", function() {
         createPagination({ current: 2, pages: 3});
-        expect($('a.page-number').first().text()).toEqual("1");
+        expect($('a.page-number').last().text()).toEqual("3");
     });
 
     function createPagination(data) {
